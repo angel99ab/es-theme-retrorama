@@ -7,7 +7,6 @@
 # Variables
 src=$(pwd)
 dest=/etc/emulationstation/themes/retrorama/
-verbose=0
 flags=()
 
 # If no options used, don't do anything
@@ -24,31 +23,34 @@ show_usage ()
     printf "      -h    Show availabe options\n"
     printf "      -s    Replace every SLBG image\n"
     printf "      -t    Replace every theme.xml\n"
-    printf "      -T    Replace main theme.xml\n"
-    printf "      -v    Show detailed information\n\n"
+    printf "      -T    Replace main theme.xml\n\n"
 }
 
 replace_files ()
 {
+    echo "Replacing $1 files now"
+    echo "Deleting $1 files from $dest"
+    echo "Copying from $src to $dest"
+
     while read line; do
 	path=$(echo "$dest/$line")
 	
-	if [ -d $path ] && [ $line != "_art" ] && [ $verbose -eq 0 ]; then
-	    rm $dest/$line/$1
-	    cp $src/$line/$1 $dest/$line/$1
-	elif [ -d $path ] && [ $line != "_art" ] && [ $verbose -eq 1 ]; then
-	    echo "Deleted $dest/$line/$1"
-	    echo "Copied from $src/$line/$1 to $dest/$line/$1"
+	if [ -d $path ] && [ $line != "_art" ]; then
 	    rm $dest/$line/$1
 	    cp $src/$line/$1 $dest/$line/$1
 	fi
     done < tmp_s.txt
+
+    echo -e "Done\n"
 }
 
 replace_main () 
 {
+    echo "Deleted main theme.xml"
+    echo "New theme.xml was applied"
     rm $dest/theme.xml
     cp $src/theme.xml $dest/
+    echo "Done"
 }
 
 # Remove temporal systems file if exists
@@ -59,7 +61,7 @@ ls $src > tmp_s.txt
 # Save options to an array
 index=0
 
-while getopts ':ghstTv' flag; do
+while getopts ':ghstT' flag; do
     flags[$index]=$flag
     index=$((index + 1))
 done
@@ -69,7 +71,6 @@ n_times=0
 options=$((${#flags[@]} + 1))
 
 for i in ${flags[@]}; do
-    [[ $i == "v" ]] && verbose=1
     for j in ${flags[@]}; do
         if [ $i == $j ]; then
             n_times=$((n_times + 1))
