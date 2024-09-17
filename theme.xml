@@ -81,7 +81,7 @@ font: comic.otf
 			<secondaryColor>ED7014</secondaryColor>
 			<fontPath>./_art/comic.otf</fontPath>
 			<scrollSound>./_art/scroll_sound.wav</scrollSound>
-			<alignment>center</alignment>
+			<alignment>left</alignment>
 			<pos>0.04 0.23</pos>
 			<size>0.415 0.674</size>
 			<fontSize>0.033</fontSize>
@@ -111,7 +111,7 @@ font: comic.otf
 			<secondaryColor>ED7014</secondaryColor>
 			<fontPath>./_art/comic.otf</fontPath>
 			<scrollSound>./_art/scroll_sound.wav</scrollSound>
-			<alignment>center</alignment>
+			<alignment>left</alignment>
 			<pos>0.04 0.23</pos>
 			<size>0.415 0.674</size>
 			<fontSize>0.033</fontSize>
